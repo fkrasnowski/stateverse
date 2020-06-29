@@ -1,13 +1,14 @@
-import stateverse, { Store } from '../lib/index';
+import stateverse, { createStore } from '../lib/index';
+import { callbackify } from 'util';
 
 test('returns current state', () => {
-  expect(new Store(0).state).toBe(0);
+  expect(createStore(0).state).toBe(0);
 });
 
 let $store: stateverse.Store<string>;
 
 beforeEach(() => {
-  $store = new Store('').addReducers({
+  $store = createStore('').addReducers({
     set(state, value) {
       return value;
     },
@@ -16,6 +17,8 @@ beforeEach(() => {
 });
 
 test('reducers changes state', () => {
+  $store.actions.set('bird');
+
   expect($store.state).toBe('bird');
 });
 
@@ -75,5 +78,16 @@ describe('canceling effects', () => {
 
   test('prevents canceled effects to modify state', () => {
     expect($store.state).toBe('rock');
+  });
+});
+
+describe('mapping store', () => {
+  test('calls callback on mapped state watch', (done) => {
+    const callback = jest.fn((state) => {
+      expect(state).toBe('Hello Gello');
+      done();
+    });
+    $store.map((state) => `Hello ${state}`).watch(callback);
+    $store.actions.set('Gello');
   });
 });

@@ -21,3 +21,15 @@ export declare type ActionObject = {
 };
 export declare type CallBack = (...values: any) => void;
 export declare type Cleanup = () => any;
+export declare type Store<T> = {
+    readonly state: T;
+    readonly actions: Actions;
+    addReducers(reducers: Reducers<T>): Store<T>;
+    addEffects(effects: Effects): Store<T>;
+    watch(callback: (state: T) => void): Store<T>;
+    map<S>(mapFn: (state: T) => S): WatchStore<T, S>;
+};
+export declare type WatchStore<T, S> = {
+    readonly state: S;
+    watch(callback: CallBack): WatchStore<T, S>;
+};

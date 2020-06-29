@@ -29,3 +29,17 @@ export type ActionObject = {
 export type CallBack = (...values: any) => void;
 
 export type Cleanup = () => any;
+
+export type Store<T> = {
+  readonly state: T;
+  readonly actions: Actions;
+  addReducers(reducers: Reducers<T>): Store<T>;
+  addEffects(effects: Effects): Store<T>;
+  watch(callback: (state: T) => void): Store<T>;
+  map<S>(mapFn: (state: T) => S): WatchStore<T, S>;
+};
+
+export type WatchStore<T, S> = {
+  readonly state: S;
+  watch(callback: CallBack): WatchStore<T, S>;
+};
