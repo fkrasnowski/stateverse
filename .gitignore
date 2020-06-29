@@ -1,7 +1,7 @@
 # Lib
-lib
+lib/
 # Test
-__tests__
+__tests__/
 # Logs
 logs
 *.log
