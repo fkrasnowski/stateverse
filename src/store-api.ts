@@ -10,7 +10,7 @@ import {
 } from './types';
 import { ID } from './id-generator';
 import err from './store-error';
-export { wachable } from './wachable';
+export { watchable } from './watchable';
 export * from './types';
 
 const createWatchStore = <T, S>(

@@ -9,7 +9,7 @@ export declare type Reducer<T> = (state: T, ...values: any) => T;
 export declare type Reducers<T> = {
     [name: string]: Reducer<T>;
 };
-export declare type Effect = (actions: Actions, cleanup: (cleanup: Cleanup) => void, ...values: any) => Promise<void>;
+export declare type Effect = (actions: Actions, cleanup: (cleanupFn: Cleanup) => void, ...values: any) => Promise<void>;
 export declare type Effects = {
     [name: string]: Effect;
 };

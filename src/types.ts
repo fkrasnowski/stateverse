@@ -12,7 +12,7 @@ export type Reducers<T> = {
 
 export type Effect = (
   actions: Actions,
-  cleanup: (cleanup: Cleanup) => void,
+  cleanup: (cleanupFn: Cleanup) => void,
   ...values: any
 ) => Promise<void>;
 export type Effects = {
