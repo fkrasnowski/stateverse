@@ -1,10 +1,10 @@
-import fxer, { Store } from '../lib/index';
+import stateverse, { Store } from '../lib/index';
 
 test('returns current state', () => {
   expect(new Store(0).state).toBe(0);
 });
 
-let $store: fxer.Store<string>;
+let $store: stateverse.Store<string>;
 
 beforeEach(() => {
   $store = new Store('').addReducers({
@@ -53,13 +53,13 @@ test('executes effects', (done) => {
 
 describe('canceling effects', () => {
   let cleanupFn: jest.Mock;
-  let waterFx: fxer.Effect;
+  let waterFx: stateverse.Effect;
 
   beforeEach(() => {
     cleanupFn = jest.fn();
     waterFx = async (
-      reducers: fxer.Actions,
-      cleanup: (fn: fxer.Cleanup) => void
+      reducers: stateverse.Actions,
+      cleanup: (fn: stateverse.Cleanup) => void
     ) => {
       cleanup(cleanupFn);
       setTimeout(() => reducers.set('water'), 5000);

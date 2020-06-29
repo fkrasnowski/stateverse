@@ -1,5 +1,5 @@
 {
-  "name": "fxer",
+  "name": "stateverse",
   "version": "0.1.0",
   "description": "Async state manager - painless manager for async state changes and side effects",
   "main": "lib/index.js",
