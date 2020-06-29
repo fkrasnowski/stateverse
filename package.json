@@ -14,14 +14,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/fkrasnowski/fxer.git"
+    "url": "git+https://github.com/fkrasnowski/stateverse.git"
   },
   "author": "fkrasnowski",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/fkrasnowski/fxer/issues"
+    "url": "https://github.com/fkrasnowski/stateverse/issues"
   },
-  "homepage": "https://github.com/fkrasnowski/fxer#readme",
+  "homepage": "https://github.com/fkrasnowski/stateverse#readme",
   "devDependencies": {
     "@types/jest": "^26.0.3",
     "@types/node": "^14.0.14",
