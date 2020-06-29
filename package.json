@@ -1,6 +1,6 @@
 {
   "name": "stateverse",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Async state manager - painless manager for async state changes and side effects",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
