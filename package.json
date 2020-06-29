@@ -4,6 +4,9 @@
   "description": "Async state manager - painless manager for async state changes and side effects",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "test": "jest --config jest.config.js",
     "build": "tsc",
