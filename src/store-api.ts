@@ -38,7 +38,7 @@ const createWatchStore = <T, S>(
   };
 };
 
-export const createStore = <T>(initialState: T) => {
+export const createStore = <T>(initialState: T): Store<T> => {
   let _state: T = initialState;
   let _innerState: T = initialState;
   let _reducers: Reducers<T> = {};
