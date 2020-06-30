@@ -26,7 +26,7 @@ export type ActionObject = {
   id: number;
 };
 
-export type CallBack = (...values: any) => void;
+export type Callback = (...values: any) => void;
 
 export type Cleanup = () => any;
 
@@ -36,10 +36,12 @@ export type Store<T> = {
   addReducers(reducers: Reducers<T>): Store<T>;
   addEffects(effects: Effects): Store<T>;
   watch(callback: (state: T) => void): Store<T>;
+  unwatch(callback: (state: T) => any): Store<T>;
   map<S>(mapFn: (state: T) => S): WatchStore<T, S>;
 };
 
 export type WatchStore<T, S> = {
   readonly state: S;
-  watch(callback: CallBack): WatchStore<T, S>;
+  watch(callback: Callback): WatchStore<T, S>;
+  unwatch(callback: (state: T) => any): WatchStore<T, S>;
 };

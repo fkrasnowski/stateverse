@@ -1,7 +1,5 @@
 # Lib
 lib/
-# Test
-__tests__/
 # Logs
 logs
 *.log

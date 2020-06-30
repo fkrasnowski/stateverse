@@ -3,7 +3,7 @@ import {
   Effects,
   Actions,
   ActionObject,
-  CallBack,
+  Callback,
   Cleanup,
   Store,
   WatchStore,
@@ -12,6 +12,7 @@ import { ID } from './id-generator';
 import err from './store-error';
 export { watchable } from './watchable';
 export * from './types';
+import * as watchAPI from './watch';
 
 const createWatchStore = <T, S>(
   store: Store<T>,
@@ -25,15 +26,17 @@ const createWatchStore = <T, S>(
       _listeners.forEach((callback) => callback(_state));
     }
   };
-  let _listeners: CallBack[] = [];
+  let _listeners: Callback[] = [];
   store.watch((state: T) => _setState(state));
   return {
     get state() {
       return _state;
     },
-    watch(callback: CallBack) {
-      _listeners.push(callback);
-      return this;
+    watch(callback: Callback) {
+      return watchAPI.watch(callback, _listeners, this);
+    },
+    unwatch(callback: (state: T) => any) {
+      return watchAPI.unwatch(callback, _listeners, this);
     },
   };
 };
@@ -43,8 +46,8 @@ export const createStore = <T>(initialState: T): Store<T> => {
   let _innerState: T = initialState;
   let _reducers: Reducers<T> = {};
   let _effects: Effects = {};
-  let _listeners: CallBack[] = [];
-  let _actionListeners: { [name: string]: CallBack[] } = {};
+  let _listeners: Callback[] = [];
+  let _actionListeners: { [name: string]: Callback[] } = {};
   const _id = new ID();
   let _cleanup: (() => void) | null = () => {};
   const _clean = () => {
@@ -149,9 +152,11 @@ export const createStore = <T>(initialState: T): Store<T> => {
       };
       return this;
     },
-    watch(callback: (state: T) => void) {
-      _listeners.push(callback);
-      return this;
+    watch(callback: (state: T) => any) {
+      return watchAPI.watch(callback, _listeners, this);
+    },
+    unwatch(callback: (state: T) => any) {
+      return watchAPI.unwatch(callback, _listeners, this);
     },
     map<S>(mapFn: (state: T) => S): WatchStore<T, S> {
       return createWatchStore<T, S>(this, mapFn);
