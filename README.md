@@ -4,7 +4,7 @@ Async state manager - painless manager for async state changes and side effects
 
 ## Installation
 
-```
+```sh
 # npm
 npm i --save stateverse
 
@@ -14,9 +14,9 @@ yarn add stateverse
 
 ## Features
 
-- Minimalistic API
-- Framework agnostic
-- TypeScript support
+- 👣 Minimalistic API
+- 👨‍👩‍👧‍👦 Framework agnostic
+- 🦾 TypeScript support
 
 ## Example
 
@@ -139,42 +139,57 @@ It's really **important** to understand this idea. **Stateverse** assumes that `
 
 ## API
 
-### `createStore<T>(initialState: T): stateverse.Store<T>`
+#### `createStore<T>(initialState: T): stateverse.Store<T>`
 
-Returns store that holds state of type `T`.
+Returns store that holds state of type `T`
 
-### `.state`
+#### `.state`
 
 Returns current state
 
-### `.watch(callback: (state: T) => any)`
+#### `.watch(callback: (state: T) => any)`
 
-Attaches a `callback` function to observe state changes.
+Attaches a `callback` function to observe state changes
 
-### `.actions.<action-name>.watch(callback: (...values: any) => any)`
+#### `.unwatch(callback: (state: T) => any)`
+
+Detaches a `callback` function to obseration
+
+```js
+const callbackFn = fn.spy();
+store.watch(callbackFn); //Ataches: callbackFn
+//...
+store.unwatch(callbackFn); //Detaches: callbackFn
+```
+
+#### `.actions.<action-name>.watch(callback: (...values: any) => any)`
 
 Triggers `callback` on action call with `values` (arguments) provided to the action
 
-### `.map<T, S>(mapFn: (state: T) => S): stateverse.WatchStore<T, S>`
+#### `.map<T, S>(mapFn: (state: T) => S): stateverse.WatchStore<T, S>`
 
-A map function to map state and watch only for particular state changes.
+A map function to map state and watch only for particular state changes
 
-### `Reducer<T> = (state: T, ...values: any) => T`
+```js
+arrayStore.map((state) => state[0]).watch(console.log);
+```
+
+#### `Reducer<T> = (state: T, ...values: any) => T`
 
 A pure function that takes state as first argument and additional values provided on action call
 
-### `Effect = (reducers: Actions, cleanup: (cleanupFn: Cleanup) => void, ...values: any) => Promise<void>`
+#### `Effect = (reducers: Actions, cleanup: (cleanupFn: Cleanup) => void, ...values: any) => Promise<void>`
 
 A function returning `Promise` (`async function`)
 
-### `.addReducers(reducers: Reducers<T>)`
+#### `.addReducers(reducers: Reducers<T>)`
 
 Adds `reducers` to store
 
-### `.addEffects(effects: Effects)`
+#### `.addEffects(effects: Effects)`
 
 Adds `effects` to store
 
-### `watchable(fn: Function): watchableFn`
+#### `watchable(fn: Function): watchableFn`
 
-Creates function with additional method `.watch`
+Creates function with additional methods `.watch` and `.unwatch`
