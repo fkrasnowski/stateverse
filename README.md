@@ -153,11 +153,11 @@ Attaches a `callback` function to observe state changes
 
 #### `.unwatch(callback: (state: T) => any)`
 
-Detaches a `callback` function to obseration
+Detaches a callback function from observation
 
 ```js
 const callbackFn = fn.spy();
-store.watch(callbackFn); //Ataches: callbackFn
+store.watch(callbackFn); //Attaches: callbackFn
 //...
 store.unwatch(callbackFn); //Detaches: callbackFn
 ```
