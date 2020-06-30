@@ -21,6 +21,13 @@
   "bugs": {
     "url": "https://github.com/fkrasnowski/stateverse/issues"
   },
+  "keywords": [
+    "state-management",
+    "async",
+    "side-effects",
+    "state",
+    "typescript"
+  ],
   "homepage": "https://github.com/fkrasnowski/stateverse#readme",
   "devDependencies": {
     "@types/jest": "^26.0.3",
