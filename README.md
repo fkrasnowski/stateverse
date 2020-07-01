@@ -193,3 +193,7 @@ Adds `effects` to store
 #### `watchable(fn: Function): watchableFn`
 
 Creates function with additional methods `.watch` and `.unwatch`
+
+## Complementary packages
+
+- **React:** [stateverse-react](https://github.com/fkrasnowski/stateverse-react)
